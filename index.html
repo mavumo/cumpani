@@ -1,718 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Companion Hub Prototype</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    :root {
-      --radius: 8px;
-      --shadow: 0 6px 16px rgba(0,0,0,0.08);
-      --transition: 0.25s cubic-bezier(.4,.2,.2,1);
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-      background:#f5f7fa;
-      color:#1f2d3a;
-    }
-    *{box-sizing:border-box;}
-    body{margin:0;min-height:100vh;display:flex;flex-direction:column;}
-    header{
-      background:#fff;
-      padding:10px 16px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      border-bottom:1px solid #e2e8f0;
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-    header h1{margin:0;font-size:1.2rem;flex:1;}
-    nav a{
-      margin-right:12px;
-      text-decoration:none;
-      color:#344767;
-      font-weight:600;
-      font-size:0.9rem;
-    }
-    .badge{background:#2d9f8f;color:#fff;padding:2px 8px;border-radius:999px;font-size:0.55rem;display:inline-block;vertical-align:middle;}
-    .container{max-width:1200px;margin:16px auto;padding:0 12px;flex:1;}
-    .grid{display:grid;gap:16px;}
-    .card{
-      background:#fff;
-      border-radius:var(--radius);
-      padding:16px;
-      box-shadow:var(--shadow);
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .profile-card{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .avatar{
-      width:64px;
-      height:64px;
-      border-radius:50%;
-      object-fit:cover;
-      flex-shrink:0;
-      background:#ddd;
-    }
-    .button{
-      padding:8px 14px;
-      border:none;
-      cursor:pointer;
-      border-radius:6px;
-      font-weight:600;
-      font-size:0.9rem;
-      transition:var(--transition);
-    }
-    .btn-primary{background:#5f3dc4;color:#fff;}
-    .btn-outline{background:transparent;border:2px solid #5f3dc4;color:#5f3dc4;}
-    .btn-small{padding:6px 10px;font-size:0.7rem;border-radius:4px;}
-    .pill{background:#eef2f7;padding:4px 10px;border-radius:999px;font-size:0.6rem;margin-right:4px;display:inline-block;}
-    .flex{display:flex;gap:12px;align-items:center;}
-    .label{font-size:0.75rem;color:#555;margin-bottom:4px;display:block;}
-    .tag{background:#d7c8ff;color:#3f2d6a;padding:4px 10px;border-radius:999px;font-size:0.6rem;margin-right:4px;}
-    .star{color:#f5c518;}
-    .small{font-size:0.8rem;color:#555;}
-    .featured {
-      position: absolute;
-      top:12px;
-      right:12px;
-      background:linear-gradient(135deg,#f9c74f,#f9844a);
-      padding:6px 12px;
-      border-radius:999px;
-      color:#1f2d3a;
-      font-size:0.6rem;
-      font-weight:700;
-    }
-    .paywall{
-      background:#fff3f0;
-      border:1px dashed #ff7f50;
-      padding:16px;
-      border-radius:8px;
-      text-align:center;
-    }
-    .profile-actions{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;}
-    .badge-verified{background:#1abc9c;color:#fff;padding:4px 10px;border-radius:999px;font-size:0.6rem;margin-left:4px;}
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.35);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-      z-index:50;
-    }
-    .modal{
-      background:#fff;
-      border-radius:10px;
-      width:100%;
-      max-width:500px;
-      padding:20px;
-      position:relative;
-      box-shadow:0 30px 60px rgba(0,0,0,0.15);
-    }
-    .close-btn{
-      position:absolute;
-      top:10px;
-      right:10px;
-      background:transparent;
-      border:none;
-      font-size:18px;
-      cursor:pointer;
-    }
-    .pill-small{background:#f0f4ff;padding:4px 8px;border-radius:6px;font-size:0.6rem;margin-right:4px;}
-    .feed-post{border:1px solid #e2e8f0;border-radius:8px;padding:12px;background:#fff;position:relative;}
-    .featured-tag{background:#ffe6a1;color:#7a5a00;padding:4px 10px;border-radius:999px;font-size:0.55rem;display:inline-block;margin-right:6px;}
-    .status-badge{background:#edf7ed;color:#22704f;padding:4px 10px;border-radius:999px;font-size:0.55rem;display:inline-block;margin-right:6px;}
-    .small-input{width:100%;padding:8px;border:1px solid #ccd7e2;border-radius:6px;font-size:0.9rem;margin-bottom:8px;}
-    .divider{height:1px;background:#e2e8f0;margin:24px 0;}
-    .star-outline{stroke:#ccc;fill:none;stroke-width:2;}
-    .rating{display:inline-flex;gap:2px;align-items:center;}
-    @media (min-width:900px){
-      .two-col{grid-template-columns:2fr 1fr;}
-      .three-col{grid-template-columns:repeat(3,1fr);}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpani - Exclusive Companionship for Discerning Clients</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Companion Hub</h1>
-    <nav>
-      <a href="#" data-view="browse">Browse</a>
-      <a href="#" data-view="feed">Feed</a>
-      <a href="#" data-view="live">Live</a>
-      <a href="#" data-view="favorites">Favorites</a>
-      <a href="#" id="membership-toggle" style="margin-left:12px;">Subscribe</a>
+    <!-- Age Verification Modal -->
+    <div id="ageVerificationModal" class="modal age-verification-modal">
+        <div class="modal-content age-verification-content">
+            <div class="age-verification-header">
+                <h2>Age Verification Required</h2>
+                <p>You must be 18 years or older to access this website</p>
+            </div>
+            <div class="age-verification-form">
+                <label for="birthDate">Enter your date of birth:</label>
+                <input type="date" id="birthDate" required>
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="termsAccept" required>
+                    <label for="termsAccept">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+                <button id="verifyAge" class="btn btn--primary btn--full-width">Verify & Enter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <h1>Cumpani</h1>
+                    <span>Elite Companions</span>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search companions..." id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="nav-icon" id="notificationBtn">🔔</button>
+                <button class="nav-icon theme-toggle" id="themeToggle">🌙</button>
+                <button class="btn btn--primary btn--sm" id="membershipBtn">Upgrade to Premium</button>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <div class="container" id="root">
-    <!-- Views injected here -->
-  </div>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active" data-tab="feed">
+                    <span class="icon">🏠</span>
+                    <span>Feed</span>
+                </button>
+                <button class="sidebar-item" data-tab="explore">
+                    <span class="icon">🔍</span>
+                    <span>Explore</span>
+                </button>
+                <button class="sidebar-item" data-tab="events">
+                    <span class="icon">📅</span>
+                    <span>Events</span>
+                </button>
+                <button class="sidebar-item" data-tab="profile">
+                    <span class="icon">👤</span>
+                    <span>Profile</span>
+                </button>
+            </nav>
+        </aside>
 
-  <!-- Booking Modal -->
-  <div id="booking-modal" style="display:none;">
-    <div class="modal-backdrop" aria-modal="true">
-      <div class="modal">
-        <button class="close-btn" onclick="closeModal()">×</button>
-        <h2>Book Companion</h2>
-        <div id="booking-details"></div>
-        <div>
-          <label class="label">Select Date & Time</label>
-          <input type="datetime-local" id="booking-datetime" class="small-input" />
-          <label class="label">Duration (hours)</label>
-          <input type="number" id="booking-duration" class="small-input" min="1" value="1" />
-          <label class="label">Price (ZAR)</label>
-          <input type="number" id="booking-price" class="small-input" min="100" value="500" />
-        </div>
-        <button class="button btn-primary" onclick="confirmBooking()">Confirm & Pay</button>
-        <p class="small" style="margin-top:12px;">* Payment and confirmation are simulated in this prototype.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Messaging Modal -->
-  <div id="message-modal" style="display:none;">
-    <div class="modal-backdrop">
-      <div class="modal">
-        <button class="close-btn" onclick="closeMessageModal()">×</button>
-        <h2>Message Companion</h2>
-        <div id="message-thread" style="max-height:300px;overflow:auto;border:1px solid #e2e8f0;border-radius:6px;padding:8px;margin-bottom:12px;">
-          <!-- messages -->
-        </div>
-        <textarea id="message-input" placeholder="Type your message..." style="width:100%;height:80px;padding:8px;border:1px solid #ccd7e2;border-radius:6px;"></textarea>
-        <div style="margin-top:8px;display:flex;gap:8px;">
-          <button class="button btn-primary" onclick="sendMessage()">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <template id="profile-card-template">
-    <div class="card">
-      <div class="profile-card">
-        <img class="avatar" />
-        <div style="flex:1;">
-          <div class="flex">
-            <div>
-              <div class="name" style="font-weight:600;"></div>
-              <div class="small">Location: <span class="location"></span></div>
-            </div>
-            <div style="margin-left:auto;">
-              <span class="badge-verified" style="display:none;">Verified</span>
-            </div>
-          </div>
-          <div class="bio" style="margin:6px 0;"></div>
-          <div class="profile-actions">
-            <button class="button btn-outline btn-small view-profile">View</button>
-            <button class="button btn-small favorite-btn">★</button>
-            <button class="button btn-small message-btn">Message</button>
-          </div>
-        </div>
-      </div>
-      <div class="featured" style="display:none;">Featured</div>
-    </div>
-  </template>
-
-  <template id="feed-post-template">
-    <div class="feed-post">
-      <div style="display:flex;gap:10px;align-items:center;">
-        <div style="flex:1;">
-          <div><strong class="author-name"></strong> <span class="small">posted</span></div>
-          <div class="small" style="margin-top:2px;"><span class="time-ago"></span></div>
-        </div>
-        <div style="margin-left:auto;">
-          <span class="featured-tag" style="display:none;">Featured</span>
-        </div>
-      </div>
-      <p class="content" style="margin:10px 0;"></p>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <button class="button btn-small promote-btn">Promote</button>
-        <button class="button btn-small follow-btn">Follow</button>
-      </div>
-    </div>
-  </template>
-
-  <script>
-    // Mock data. Replace with API integration for real backend.
-    const mockCompanions = [
-      {
-        id: 'c1',
-        name: 'Zara M.',
-        location: 'Cape Town',
-        bio: 'Lifestyle companion for events and conversation. Loves travel and fine dining.',
-        avatar_url: 'https://i.pravatar.cc/150?img=12',
-        verified: true,
-        featured: true,
-        rating: 4.8,
-        reviews: [
-          { rating: 5, comment: 'Excellent company, very professional.' },
-          { rating: 4, comment: 'Great conversation, punctual.' }
-        ]
-      },
-      {
-        id: 'c2',
-        name: 'Lerato K.',
-        location: 'Johannesburg',
-        bio: 'Your go-to for cultural outings and personal attention. Fluent in 3 languages.',
-        avatar_url: 'https://i.pravatar.cc/150?img=47',
-        verified: false,
-        featured: false,
-        rating: 4.2,
-        reviews: [
-          { rating: 4, comment: 'Warm and engaging.' }
-        ]
-      },
-      {
-        id: 'c3',
-        name: 'Nadia R.',
-        location: 'Durban',
-        bio: 'Event companion, live updates, and personal branding advice. High engagement.',
-        avatar_url: 'https://i.pravatar.cc/150?img=5',
-        verified: true,
-        featured: false,
-        rating: 4.9,
-        reviews: [
-          { rating: 5, comment: 'Top-tier presence and communication!' }
-        ]
-      }
-    ];
-
-    const mockFeed = [
-      {
-        id: 'f1',
-        companion_id: 'c1',
-        author: 'Zara M.',
-        content: 'Just got featured for the weekend elite spotlight—booking slots are limited!',
-        created_at: Date.now() - 1000 * 60 * 60 * 2,
-        is_featured: true,
-        boost_weight: 5,
-        followed: false
-      },
-      {
-        id: 'f2',
-        companion_id: 'c3',
-        author: 'Nadia R.',
-        content: 'New live session tonight: “Lifestyle tips & Q&A.” Members get priority access.',
-        created_at: Date.now() - 1000 * 60 * 60 * 10,
-        is_featured: false,
-        boost_weight: 2,
-        followed: false
-      }
-    ];
-
-    // Utility
-    function getMembership(){
-      return localStorage.getItem('membership') === 'premium';
-    }
-    function toggleMembership(){
-      if(getMembership()){
-        localStorage.removeItem('membership');
-      } else {
-        localStorage.setItem('membership','premium');
-      }
-      renderCurrent();
-    }
-    function isFavorited(id){
-      const favs = JSON.parse(localStorage.getItem('favs')||'[]');
-      return favs.includes(id);
-    }
-    function addFavorite(id){
-      let favs = JSON.parse(localStorage.getItem('favs')||'[]');
-      if(!favs.includes(id)) favs.push(id);
-      localStorage.setItem('favs', JSON.stringify(favs));
-      renderCurrent();
-    }
-    function removeFavorite(id){
-      let favs = JSON.parse(localStorage.getItem('favs')||'[]');
-      favs = favs.filter(x=>x!==id);
-      localStorage.setItem('favs', JSON.stringify(favs));
-      renderCurrent();
-    }
-
-    function timeAgo(ts){
-      const diff = Date.now() - ts;
-      if(diff < 60000) return 'just now';
-      if(diff < 3600000) return Math.floor(diff/60000)+'m ago';
-      if(diff < 86400000) return Math.floor(diff/3600000)+'h ago';
-      return Math.floor(diff/86400000)+'d ago';
-    }
-
-    // View management
-    let currentView = 'browse';
-    const root = document.getElementById('root');
-    const membershipToggle = document.getElementById('membership-toggle');
-    membershipToggle.addEventListener('click', e=>{
-      e.preventDefault();
-      toggleMembership();
-    });
-
-    document.querySelectorAll('nav a[data-view]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        currentView = a.dataset.view;
-        renderCurrent();
-      });
-    });
-
-    function renderCurrent(){
-      // Update membership button
-      if(getMembership()){
-        membershipToggle.textContent='Premium Member (Cancel)';
-      } else {
-        membershipToggle.textContent='Subscribe';
-      }
-
-      if(currentView === 'browse') renderBrowse();
-      if(currentView === 'feed') renderFeed();
-      if(currentView === 'live') renderLive();
-      if(currentView === 'favorites') renderFavorites();
-    }
-
-    // Browse view
-    function renderBrowse(){
-      root.innerHTML = `
-        <div class="grid two-col" style="gap:24px;">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-              <h2>Browse Companions</h2>
-              <div>
-                <button class="button btn-outline btn-small" onclick="filterVerified()">Verified Only</button>
-                <button class="button btn-outline btn-small" onclick="clearFilters()">Clear</button>
-              </div>
-            </div>
-            <div id="profile-list" class="grid three-col" style="margin-bottom:30px;"></div>
-          </div>
-          <div>
-            <div class="card">
-              <h3>How it works</h3>
-              <p>Browse verified companions, save favorites, book time, and access exclusive live sessions as a premium member.</p>
-              <p><strong>Verified badge</strong> means identity and background has been reviewed.</p>
-              <p><strong>Featured</strong> companions are boosted in the feed and homepage.</p>
-            </div>
-            <div class="card" style="margin-top:16px;">
-              <h3>Membership</h3>
-              <p>Status: <strong>${getMembership()? 'Premium' : 'Free'}</strong></p>
-              <p>${getMembership() ? 'You can access live content.' : 'Subscribe to unlock live sessions and priority booking.'}</p>
-              <button class="button btn-primary" onclick="toggleMembership()">${getMembership() ? 'Cancel' : 'Subscribe'}</button>
-            </div>
-          </div>
-        </div>
-      `;
-      const list = document.getElementById('profile-list');
-      const template = document.getElementById('profile-card-template');
-
-      let filtered = [...mockCompanions];
-      if(window.verifiedOnly) filtered = filtered.filter(c=>c.verified);
-
-      // sort featured first
-      filtered.sort((a,b)=> (b.featured?1:0) - (a.featured?1:0));
-
-      filtered.forEach(p=>{
-        const clone = template.content.cloneNode(true);
-        clone.querySelector('.name').textContent = p.name;
-        clone.querySelector('.location').textContent = p.location;
-        clone.querySelector('.bio').textContent = p.bio;
-        clone.querySelector('.avatar').src = p.avatar_url;
-        if(p.verified) clone.querySelector('.badge-verified').style.display='inline-block';
-        if(p.featured) clone.querySelector('.featured').style.display='block';
-        const viewBtn = clone.querySelector('.view-profile');
-        viewBtn.addEventListener('click', ()=> openProfile(p.id));
-        const favBtn = clone.querySelector('.favorite-btn');
-        favBtn.textContent = isFavorited(p.id) ? '★' : '☆';
-        favBtn.addEventListener('click', ()=>{
-          if(isFavorited(p.id)) removeFavorite(p.id);
-          else addFavorite(p.id);
-        });
-        clone.querySelector('.message-btn').addEventListener('click', ()=> openMessage(p.id, p.name));
-        list.appendChild(clone);
-      });
-    }
-
-    function filterVerified(){
-      window.verifiedOnly = true;
-      renderCurrent();
-    }
-    function clearFilters(){
-      window.verifiedOnly = false;
-      renderCurrent();
-    }
-
-    // Favorites view
-    function renderFavorites(){
-      root.innerHTML = `<h2>Favorites</h2><div id="fav-list" class="grid three-col"></div>`;
-      const favs = JSON.parse(localStorage.getItem('favs')||'[]');
-      const list = document.getElementById('fav-list');
-      const template = document.getElementById('profile-card-template');
-      const selected = mockCompanions.filter(c=>favs.includes(c.id));
-
-      if(selected.length === 0){
-        list.innerHTML = `<div class="card"><p>No favorites yet. Browse companions to save.</p></div>`;
-        return;
-      }
-
-      selected.forEach(p=>{
-        const clone = template.content.cloneNode(true);
-        clone.querySelector('.name').textContent = p.name;
-        clone.querySelector('.location').textContent = p.location;
-        clone.querySelector('.bio').textContent = p.bio;
-        clone.querySelector('.avatar').src = p.avatar_url;
-        if(p.verified) clone.querySelector('.badge-verified').style.display='inline-block';
-        if(p.featured) clone.querySelector('.featured').style.display='block';
-        const viewBtn = clone.querySelector('.view-profile');
-        viewBtn.addEventListener('click', ()=> openProfile(p.id));
-        const favBtn = clone.querySelector('.favorite-btn');
-        favBtn.textContent = isFavorited(p.id) ? '★' : '☆';
-        favBtn.addEventListener('click', ()=>{
-          if(isFavorited(p.id)) removeFavorite(p.id);
-          else addFavorite(p.id);
-        });
-        clone.querySelector('.message-btn').addEventListener('click', ()=> openMessage(p.id, p.name));
-        list.appendChild(clone);
-      });
-    }
-
-    // Feed view
-    function renderFeed(){
-      root.innerHTML = `
-        <div class="grid two-col" style="gap:24px;">
-          <div>
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-              <h2>Escort Feed</h2>
-              <div><small>Escorts post updates; promote to get featured.</small></div>
-            </div>
-            <div id="feed-list" style="display:flex;flex-direction:column;gap:16px;"></div>
-          </div>
-          <div>
-            <div class="card">
-              <h3>New Update</h3>
-              <div>
-                <div class="label">You are posting as <strong>Zara M.</strong> (mock companion view)</div>
-                <textarea id="new-post-content" placeholder="Share an update..." rows="4" style="width:100%;padding:10px;border:1px solid #ccd7e2;border-radius:6px;"></textarea>
-                <div style="display:flex;gap:8px;margin-top:6px;">
-                  <button class="button btn-primary" onclick="createPost()">Post</button>
-                  <button class="button btn-outline btn-small" onclick="promoteLatest()">Promote Latest</button>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Feed Tab -->
+            <div class="tab-content active" id="feedTab">
+                <div class="feed-header">
+                    <h2>Your Feed</h2>
+                    <p>Discover verified elite companions</p>
                 </div>
-                <div class="small" style="margin-top:6px;">Promoted posts appear with “Featured” badge and higher visibility.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      const list = document.getElementById('feed-list');
-      const tpl = document.getElementById('feed-post-template');
-
-      // sort: featured first then by recency + boost_weight
-      const sorted = [...mockFeed].sort((a,b)=>{
-        if(a.is_featured !== b.is_featured) return b.is_featured - a.is_featured;
-        const aScore = (a.boost_weight||0) + (Date.now() - a.created_at)/100000000;
-        const bScore = (b.boost_weight||0) + (Date.now() - b.created_at)/100000000;
-        return bScore - aScore;
-      });
-
-      sorted.forEach(p=>{
-        const clone = tpl.content.cloneNode(true);
-        clone.querySelector('.author-name').textContent = p.author;
-        clone.querySelector('.content').textContent = p.content;
-        clone.querySelector('.time-ago').textContent = timeAgo(p.created_at);
-        if(p.is_featured) clone.querySelector('.featured-tag').style.display='inline-block';
-        const promoteBtn = clone.querySelector('.promote-btn');
-        promoteBtn.addEventListener('click', ()=>{
-          p.is_featured = true;
-          p.boost_weight += 3;
-          renderFeed();
-        });
-        const followBtn = clone.querySelector('.follow-btn');
-        followBtn.textContent = p.followed ? 'Following' : 'Follow';
-        followBtn.addEventListener('click', ()=>{
-          p.followed = !p.followed;
-          renderFeed();
-        });
-        list.appendChild(clone);
-      });
-    }
-
-    function createPost(){
-      const content = document.getElementById('new-post-content').value.trim();
-      if(!content) return alert('Write something first.');
-      mockFeed.unshift({
-        id: 'f' + Math.random().toString(36).slice(2,6),
-        companion_id: 'c1',
-        author: 'Zara M.',
-        content,
-        created_at: Date.now(),
-        is_featured: false,
-        boost_weight: 0,
-        followed:false
-      });
-      document.getElementById('new-post-content').value='';
-      renderFeed();
-    }
-    function promoteLatest(){
-      if(mockFeed.length===0) return;
-      mockFeed[0].is_featured = true;
-      mockFeed[0].boost_weight += 5;
-      renderFeed();
-    }
-
-    // Live content view
-    function renderLive(){
-      root.innerHTML = `<h2>Live Content</h2>`;
-      if(!getMembership()){
-        root.innerHTML += `
-          <div class="paywall">
-            <p><strong>Live sessions are locked.</strong> Subscribe to access exclusive live video updates, Q&A streams, and premium interaction.</p>
-            <button class="button btn-primary" onclick="toggleMembership()">Subscribe</button>
-          </div>`;
-        return;
-      }
-      root.innerHTML += `
-        <div style="display:grid;gap:16px;">
-          <div class="card">
-            <h3>Upcoming Live: Lifestyle Q&A with Nadia R.</h3>
-            <p class="small">Starts in 1h 32m</p>
-            <div style="background:#000;height:180px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;">
-              <div>Video placeholder (WebRTC/embed)</div>
-            </div>
-            <button class="button btn-primary" style="margin-top:8px;">Join Live</button>
-          </div>
-          <div class="card">
-            <h3>Recent Session: Conversation Tips</h3>
-            <p class="small">Recorded. Available for premium members.</p>
-            <div style="background:#222;height:140px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;">
-              <div>Replay placeholder</div>
-            </div>
-            <button class="button btn-outline" style="margin-top:8px;">Watch Replay</button>
-          </div>
-        </div>
-      `;
-    }
-
-    // Profile detail
-    function openProfile(id){
-      const p = mockCompanions.find(c=>c.id===id);
-      if(!p) return alert('Profile not found');
-      root.innerHTML = `
-        <div style="display:flex;gap:24px;flex-wrap:wrap;">
-          <div style="flex:2;min-width:300px;">
-            <div class="card">
-              <div style="display:flex;gap:20px;">
-                <img class="avatar" src="${p.avatar_url}" style="width:100px;height:100px;" />
-                <div style="flex:1;">
-                  <h2 style="margin:0;">${p.name} ${p.verified?'<span class="badge-verified">Verified</span>':''}</h2>
-                  <div class="small">Location: ${p.location}</div>
-                  <div class="rating" style="margin:6px 0;">
-                    ${[...Array(5)].map((_,i)=> i < Math.floor(p.rating) ? '<span class="star">★</span>' : '<span style="color:#ddd">★</span>').join('')}
-                    <span class="small" style="margin-left:6px;">${p.rating.toFixed(1)}</span>
-                  </div>
-                  <div class="profile-actions">
-                    <button class="button btn-primary" onclick="openBooking('${p.id}','${p.name}')">Book Now</button>
-                    <button class="button btn-outline" onclick="addFavorite('${p.id}')">${isFavorited(p.id)?'Unfavorite':'Favorite'}</button>
-                    <button class="button btn-small" onclick="openMessage('${p.id}','${p.name}')">Message</button>
-                  </div>
-                  <div style="margin-top:8px;">
-                    <span class="pill">Companion</span>
-                    <span class="pill">Featured</span>
-                  </div>
+                <div class="feed-container" id="feedContainer">
+                    <!-- Posts will be dynamically loaded here -->
                 </div>
-              </div>
-              <div style="margin-top:16px;">
-                <h3>About</h3>
-                <p>${p.bio}</p>
-              </div>
-              <div class="divider"></div>
-              <div>
-                <h3>Reviews</h3>
-                ${p.reviews.map(r=>`
-                  <div class="card" style="padding:10px;margin-bottom:8px;">
-                    <div class="rating">
-                      ${[...Array(5)].map((_,i)=> i < r.rating ? '<span class="star">★</span>' : '<span style="color:#ddd">★</span>').join('')}
+            </div>
+
+            <!-- Explore Tab -->
+            <div class="tab-content" id="exploreTab">
+                <div class="explore-header">
+                    <h2>Explore</h2>
+                    <div class="explore-filters">
+                        <button class="filter-btn active">Top Companions</button>
+                        <button class="filter-btn">Live Now</button>
+                        <button class="filter-btn">Trending</button>
                     </div>
-                    <p style="margin:6px 0;">${r.comment}</p>
-                  </div>
-                `).join('')}
-              </div>
+                </div>
+                <div class="explore-content">
+                    <div class="live-streams-section">
+                        <h3>Live Streams</h3>
+                        <div class="live-streams-grid" id="liveStreamsGrid">
+                            <!-- Live streams will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="top-companions-section">
+                        <h3>Top Companions</h3>
+                        <div class="companions-grid" id="companionsGrid">
+                            <!-- Companions will be loaded here -->
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div style="flex:1;min-width:280px;">
-            <div class="card">
-              <h3>About Booking</h3>
-              <p><strong>Rate:</strong> from R500 / hr</p>
-              <p><strong>Availability:</strong> Check calendar during booking.</p>
-              <p><strong>Cancellation:</strong> 3h prior allowed.</p>
-              <button class="button btn-primary" onclick="openBooking('${p.id}','${p.name}')">Start Booking</button>
+
+            <!-- Events Tab -->
+            <div class="tab-content" id="eventsTab">
+                <div class="events-header">
+                    <h2>Private Events</h2>
+                    <p>Exclusive events for premium members</p>
+                </div>
+                <div class="events-grid" id="eventsGrid">
+                    <!-- Events will be loaded here -->
+                </div>
             </div>
-            <div class="card" style="margin-top:16px;">
-              <h3>Follow & Updates</h3>
-              <p>Follow to get notified when ${p.name} posts to the feed or goes live.</p>
-              <button class="button btn-outline" onclick="followCompanion('${p.id}')">Follow</button>
+
+            <!-- Profile Tab -->
+            <div class="tab-content" id="profileTab">
+                <div class="profile-header">
+                    <h2>Your Profile</h2>
+                    <p>Manage your account and preferences</p>
+                </div>
+                <div class="profile-content">
+                    <div class="membership-status">
+                        <h3>Membership Status: <span id="membershipStatus">Guest</span></h3>
+                        <button class="btn btn--primary" id="upgradeBtn">Upgrade to Premium</button>
+                    </div>
+                </div>
             </div>
-          </div>
+        </main>
+    </div>
+
+    <!-- Companion Profile Modal -->
+    <div id="companionModal" class="modal hidden">
+        <div class="modal-content companion-modal-content">
+            <button class="modal-close" id="closeCompanionModal">&times;</button>
+            <div class="companion-profile">
+                <div class="companion-gallery">
+                    <img id="companionMainImage" src="" alt="Companion">
+                    <div class="gallery-dots" id="galleryDots"></div>
+                </div>
+                <div class="companion-info">
+                    <div class="companion-header">
+                        <h2 id="companionName"></h2>
+                        <span class="verified-badge">✓ Verified</span>
+                    </div>
+                    <div class="companion-details">
+                        <p id="companionAge"></p>
+                        <p id="companionLocation"></p>
+                        <p id="companionPrice"></p>
+                        <div class="rating">
+                            <span id="companionRating"></span>
+                            <span>⭐⭐⭐⭐⭐</span>
+                        </div>
+                    </div>
+                    <div class="companion-bio">
+                        <p id="companionBio"></p>
+                    </div>
+                    <div class="companion-services">
+                        <h4>Services</h4>
+                        <div id="companionServices"></div>
+                    </div>
+                    <div class="companion-actions">
+                        <button class="btn btn--primary btn--full-width" id="messageBtn">Send Message</button>
+                        <button class="btn btn--secondary btn--full-width" id="bookBtn">Book Session</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div style="margin-top:30px;">
-          <button class="button btn-outline" onclick="currentView='browse';renderCurrent()">← Back to Browse</button>
+    </div>
+
+    <!-- Membership Modal -->
+    <div id="membershipModal" class="modal hidden">
+        <div class="modal-content membership-modal-content">
+            <button class="modal-close" id="closeMembershipModal">&times;</button>
+            <div class="membership-content">
+                <h2>Unlock Premium Access</h2>
+                <p>Access exclusive companions, messaging, and private events</p>
+                <div class="membership-benefits">
+                    <div class="benefit">✓ Full companion profiles</div>
+                    <div class="benefit">✓ Private messaging</div>
+                    <div class="benefit">✓ Booking capabilities</div>
+                    <div class="benefit">✓ Exclusive events access</div>
+                    <div class="benefit">✓ Priority support</div>
+                </div>
+                <button class="btn btn--primary btn--full-width">Join Premium - $99/month</button>
+            </div>
         </div>
-      `;
-    }
+    </div>
 
-    function followCompanion(id){
-      alert('Followed (mock). Future: add to user followed list.');
-    }
+    <!-- Comments Modal -->
+    <div id="commentsModal" class="modal hidden">
+        <div class="modal-content comments-modal-content">
+            <button class="modal-close" id="closeCommentsModal">&times;</button>
+            <div class="comments-header">
+                <h3>Comments</h3>
+            </div>
+            <div class="comments-list" id="commentsList">
+                <!-- Comments will be loaded here -->
+            </div>
+            <div class="comment-input">
+                <input type="text" placeholder="Add a comment..." id="commentInput">
+                <button class="btn btn--primary" id="submitComment">Post</button>
+            </div>
+        </div>
+    </div>
 
-    // Booking modal logic
-    let bookingTarget = null;
-    function openBooking(id,name){
-      bookingTarget = {id,name};
-      document.getElementById('booking-details').innerHTML = `<p>Booking <strong>${name}</strong></p>`;
-      document.getElementById('booking-datetime').value = '';
-      document.getElementById('booking-duration').value = 1;
-      document.getElementById('booking-price').value = 500;
-      document.getElementById('booking-modal').style.display='block';
-    }
-    function closeModal(){
-      document.getElementById('booking-modal').style.display='none';
-    }
-    function confirmBooking(){
-      const datetime = document.getElementById('booking-datetime').value;
-      const duration = parseInt(document.getElementById('booking-duration').value,10);
-      const price = parseInt(document.getElementById('booking-price').value,10);
-      if(!datetime) return alert('Select date/time');
-      alert(`Booking confirmed with ${bookingTarget.name} on ${datetime} for ${duration}h at R${price}. (Simulated payment)`);
-      closeModal();
-    }
+    <!-- Live Stream Modal -->
+    <div id="liveStreamModal" class="modal hidden">
+        <div class="modal-content live-stream-modal-content">
+            <button class="modal-close" id="closeLiveStreamModal">&times;</button>
+            <div class="live-stream-content">
+                <div class="stream-video">
+                    <img id="streamThumbnail" src="" alt="Live Stream">
+                    <div class="live-indicator">🔴 LIVE</div>
+                    <div class="viewer-count" id="viewerCount"></div>
+                </div>
+                <div class="stream-chat">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message">
+                            <strong>User123:</strong> Amazing evening! 💎
+                        </div>
+                        <div class="chat-message">
+                            <strong>Gentleman456:</strong> Such elegance ✨
+                        </div>
+                    </div>
+                    <div class="gift-options">
+                        <button class="gift-btn">🌹 Rose - $5</button>
+                        <button class="gift-btn">💎 Diamond - $25</button>
+                        <button class="gift-btn">🍾 Champagne - $50</button>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type a message..." id="chatInput">
+                        <button class="btn btn--primary" id="sendChatMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // Messaging modal
-    let messageTarget = null;
-    function openMessage(id,name){
-      messageTarget = {id,name};
-      document.getElementById('message-thread').innerHTML = `
-        <div class="small"><em>Conversation with ${name} (mock)</em></div>
-      `;
-      document.getElementById('message-modal').style.display='block';
-    }
-    function closeMessageModal(){
-      document.getElementById('message-modal').style.display='none';
-    }
-    function sendMessage(){
-      const txt = document.getElementById('message-input').value.trim();
-      if(!txt) return;
-      const thread = document.getElementById('message-thread');
-      const msg = document.createElement('div');
-      msg.style.marginTop='6px';
-      msg.innerHTML = `<div style="background:#eef2f7;padding:8px;border-radius:6px;max-width:80%;"><strong>You:</strong> ${txt}</div>`;
-      thread.appendChild(msg);
-      document.getElementById('message-input').value='';
-      thread.scrollTop = thread.scrollHeight;
-    }
-
-    // Initial render
-    renderCurrent();
-  </script>
+    <script src="app.js"></script>
 </body>
 </html>
