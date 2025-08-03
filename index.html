@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cumpani — Premium Adult Companion Experience</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <div>
+      <span class="brand">Cumpani</span>
+      <span class="tagline">Exclusive adult companionship for discerning clients.</span>
+    </div>
+    <button class="toggle" id="toggleTheme" title="Toggle dark/light mode">🌗</button>
+  </div>
+  
+  <div class="trust-banner">
+    Highly sought after, verified companions. Absolute discretion, encrypted payment, and private encounters guaranteed.
+  </div>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="feed">Feed</button>
+    <button class="nav-tab" data-tab="streaming">Live Streaming</button>
+    <button class="nav-tab" data-tab="messages">Messages</button>
+    <button class="nav-tab" data-tab="bookings">My Bookings</button>
+  </nav>
+
+  <!-- Feed Tab Content -->
+  <div class="tab-content active" id="feed-tab">
+    <form class="filters" id="filterForm" autocomplete="off">
+      <select name="location"><option value="">Location</option>
+        <option>Pretoria</option><option>Cape Town</option><option>Durban</option>
+        <option>Johannesburg</option><option>Port Elizabeth</option>
+        <option>Bloemfontein</option><option>East London</option>
+      </select>
+      <select name="ethnicity"><option value="">Ethnicity</option>
+        <option>Xhosa</option><option>Zulu</option><option>Tswana</option>
+        <option>Coloured</option><option>White South African</option>
+        <option>Indian South African</option><option>Pedi</option>
+        <option>Middle Eastern</option><option>Ndebele</option>
+      </select>
+      <select name="orientation"><option value="">Orientation</option>
+        <option>Heterosexual</option>
+        <option>Bisexual</option>
+        <option>Pansexual</option>
+        <option>Lesbian</option>
+      </select>
+      <input name="minPrice" type="number" min="0" placeholder="Min price (ZAR)" style="width: 112px"/>
+      <input name="maxPrice" type="number" min="0" placeholder="Max price (ZAR)" style="width: 112px"/>
+      <select name="minRating"><option value="">Min rating</option>
+        <option>4.0+</option><option>4.5+</option><option>4.8+</option>
+      </select>
+      <button type="submit" style="display:none"></button>
+    </form>
+    <main class="feed-container" id="feed"></main>
+  </div>
+
+  <!-- Live Streaming Tab Content -->
+  <div class="tab-content" id="streaming-tab">
+    <div class="streaming-container">
+      <div class="streaming-header">
+        <h2>Live Companions</h2>
+        <button class="btn btn--primary" id="goLiveBtn">Go Live</button>
+      </div>
+      <div class="streams-grid" id="streamsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Messages Tab Content -->
+  <div class="tab-content" id="messages-tab">
+    <div class="messages-container">
+      <div class="inbox-view" id="inboxView">
+        <h2>Messages</h2>
+        <div class="conversations-list" id="conversationsList"></div>
+      </div>
+      <div class="chat-view hidden" id="chatView">
+        <div class="chat-header">
+          <button class="back-btn" id="backToInbox">←</button>
+          <div class="chat-companion-info">
+            <img class="chat-avatar" id="chatAvatar" src="" alt="">
+            <div>
+              <div class="chat-name" id="chatName"></div>
+              <div class="chat-status" id="chatStatus"></div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+          <input type="text" id="messageInput" placeholder="Type a message..." class="form-control">
+          <button class="btn btn--primary" id="sendMessageBtn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Bookings Tab Content -->
+  <div class="tab-content" id="bookings-tab">
+    <div class="bookings-container">
+      <h2>My Bookings</h2>
+      <div class="bookings-list" id="bookingsList"></div>
+    </div>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modalContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
